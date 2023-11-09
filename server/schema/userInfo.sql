@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS user_info CASCADE;
+
+CREATE TABLE user_info (
+	id SERIAL PRIMARY KEY,
+	last_name VARCHAR(255) NOT NULL,
+	first_name VARCHAR(255) NOT NULL,
+	title VARCHAR(255) NOT NULL
+);
