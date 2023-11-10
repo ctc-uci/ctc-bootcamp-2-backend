@@ -6,6 +6,7 @@ require('dotenv').config();
 // routes
 const user = require('./routes/user');
 const sensitiveData = require('./routes/sensitiveData');
+const accessLog = require('./routes/accessLog');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(
 
 app.use('/user', user);
 app.use('/sensitive', sensitiveData);
+app.use('/logs', accessLog);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
