@@ -1,0 +1,166 @@
+/* GET /user/culprit/ */
+{
+  "title": "Culprits",
+  "description": "Return schema of GET /user/culprit/",
+  "type": "array",
+  "items": {
+    "description": "List of culprit ids",
+    "type": "object",
+    "properties": {
+      "culprits": {
+        "description": "List of culprit ids",
+        "type": "array",
+        "items": {
+          "description": "Unique identifier of the returned user",
+          "type": "number"
+        }
+      }
+    }
+  }
+}
+
+/* GET /user/ */
+{
+  "title": "Users",
+  "description": "Return schema of GET /user/",
+  "type": "array",
+  "items": {
+    "description": "",
+    "type": "object",
+    "properties": {
+      "id": {
+        "description": "Unique identifier of the returned user",
+        "type": "number"
+      },
+      "lastName": {
+        "description": "User last name",
+        "type": "string"
+      },
+      "firstName": {
+        "description": "User first name",
+        "type": "string"
+      },
+      "title": {
+        "description": "Title of user role in Commit the Change",
+        "type": "string"
+      }
+    }
+  }
+}
+
+/* GET /user/:id/ */
+{
+  "title": "User",
+  "description": "Return schema of GET /user/:id. Array is length 1",
+  "type": "array",
+  "items": {
+    "description": "User object describing user data",
+    "type": "object",
+    "properties": {
+      "id": {
+        "description": "Unique identifier of the returned user",
+        "type": "number"
+      },
+      "lastName": {
+        "description": "User last name",
+        "type": "string"
+      },
+      "firstName": {
+        "description": "User first name",
+        "type": "string"
+      },
+      "title": {
+        "description": "Title of user role in Commit the Change",
+        "type": "string"
+      },
+      "url": {
+        "description": "URL of user profile image",
+        "type": "string",
+      },
+      "accessLevel": {
+        "description": "User's access level",
+        "type": "number",
+      },
+      "accessedData": {
+        "description": "List of sensitive data accessed by user",
+        "type": "array",
+        "items": {
+            "description": "Data access log objects",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "Unique identifier of access log",
+                    "type": "number"
+                },
+                "accessTime": {
+                  "description": "Datetime when data was accessed",
+                  "type": "string"
+                },
+                "sensitiveDataId": {
+                    "description": "Id of sensitive data",
+                    "type": "number"
+                }
+            }
+        }
+      }
+    }
+  }
+}
+
+/* GET /sensitive/ */
+{
+  "title": "Sensitive Data",
+  "description": "Return schema of GET /sensitive/",
+  "type": "array",
+  "items": {
+    "description": "List of sensitive data objects",
+    "type": "object",
+    "properties": {
+      "id": {
+        "description": "Unique identifier of the returned user",
+        "type": "number"
+      },
+      "quoteText": {
+        "description": "Content of the quote",
+        "type": "string"
+      },
+      "quoteeId": {
+        "description": "User id of the person who said the quote",
+        "type": "number"
+      },
+      "accessLevel": {
+        "description": "The lowest access level that users must have to access this data",
+        "type": "number"
+      }
+    }
+  }
+}
+
+/* GET /sensitive/:id/ */
+{
+  "title": "Sensitive Data Accessible by User",
+  "description": "Return schema of GET /sensitive/:id",
+  "type": "array",
+  "items": {
+    "description": "List of sensitive data objects",
+    "type": "object",
+    "properties": {
+      "id": {
+        "description": "Unique identifier of the returned user",
+        "type": "number"
+      },
+      "quoteText": {
+        "description": "Content of the quote",
+        "type": "string"
+      },
+      "quoteeId": {
+        "description": "User id of the person who said the quote",
+        "type": "number"
+      },
+      "accessLevel": {
+        "description": "The lowest access level that users must have to access this data",
+        "type": "number"
+      }
+    }
+  }
+}
