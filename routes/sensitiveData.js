@@ -6,7 +6,18 @@ const sensitiveDataRouter = express.Router();
 
 sensitiveDataRouter.get('/', async (req, res) => {
   try {
-    const data = await db.query(`SELECT * FROM sensitive_data;`);
+    const data = await db.query(`
+    SELECT
+      sensitive_data.id,
+      sensitive_data.quote_text,
+      sensitive_data.access_level,
+      (first_name || ' ' || last_name) as quotee_name
+    FROM
+      sensitive_data
+    LEFT JOIN user_info
+      ON sensitive_data.quotee_id = user_info.id
+    ;
+    `);
     res.status(200).json(keysToCamel(data));
   } catch (err) {
     console.log(err);
@@ -21,9 +32,13 @@ sensitiveDataRouter.get('/:userId', async (req, res) => {
       SELECT
         sensitive_data.id,
         sensitive_data.quote_text,
-        sensitive_data.quotee_id,
-        sensitive_data.access_level
-      FROM user_access_level, sensitive_data
+        sensitive_data.access_level,
+        (user_info.first_name || ' ' || user_info.last_name) as quotee_name
+      FROM
+        user_access_level,
+        sensitive_data
+      LEFT JOIN user_info
+        ON sensitive_data.quotee_id = user_info.id
       WHERE
         user_access_level.access_level >= sensitive_data.access_level AND
         user_access_level.id = $(userId)
