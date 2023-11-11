@@ -124,9 +124,9 @@
         "description": "Content of the quote",
         "type": "string"
       },
-      "quoteeId": {
-        "description": "User id of the person who said the quote",
-        "type": "number"
+      "quoteeName": {
+        "description": "Name of user who said the quote",
+        "type": "string"
       },
       "accessLevel": {
         "description": "The lowest access level that users must have to access this data",
@@ -153,9 +153,9 @@
         "description": "Content of the quote",
         "type": "string"
       },
-      "quoteeId": {
-        "description": "User id of the person who said the quote",
-        "type": "number"
+      "quoteeName": {
+        "description": "Name of user who said the quote",
+        "type": "string"
       },
       "accessLevel": {
         "description": "The lowest access level that users must have to access this data",
