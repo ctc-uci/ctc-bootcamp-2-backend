@@ -52,12 +52,9 @@ userRouter.get('/:id', async (req, res) => {
         user_profile_image.url,
         user_access_level.access_level,
         data_access_by_user.accessed_data
-      FROM user_info
-      INNER JOIN user_profile_image
-        ON user_info.id = user_profile_image.id
-      INNER JOIN user_access_level
-        ON user_info.id = user_access_level.id
-      INNER JOIN (
+      FROM
+        user_info
+      LEFT JOIN (
         SELECT
           user_id,
           ARRAY_AGG(json_build_object('id', id, 'access_time', access_time, 'sensitive_data_id', sensitive_data_id)) as accessed_data
@@ -65,6 +62,10 @@ userRouter.get('/:id', async (req, res) => {
         GROUP BY user_id
       ) AS data_access_by_user
         ON user_info.id = data_access_by_user.user_id
+      LEFT JOIN user_profile_image
+        ON user_info.id = user_profile_image.id
+      LEFT JOIN user_access_level
+        ON user_info.id = user_access_level.id
       WHERE user_info.id = $(id);
     `,
       { id },
