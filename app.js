@@ -9,7 +9,7 @@ const sensitive = require('./routes/sensitive');
 
 const app = express();
 
-const PORT = process.env.PORT || 3007;
+const PORT = process.env.PORT || 3001;
 
 app.use(
   cors({
