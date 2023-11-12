@@ -17,7 +17,7 @@ userRouter.get('/culprit', async (req, res) => {
   try {
     const culpritData = await db.query(`
     SELECT DISTINCT
-      CONCAT(user_info.first_name, ' ', user_info.last_name) AS name, ARRAY_AGG(sensitive_data.id) AS quote_texts
+      CONCAT(user_info.first_name, ' ', user_info.last_name) AS name, ARRAY_AGG(sensitive_data.id) AS illegalDataAccessed
     FROM user_info
     INNER JOIN data_access_log ON user_info.id = data_access_log.user_id
     INNER JOIN user_access_level ON user_info.id = user_access_level.id
