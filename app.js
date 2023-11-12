@@ -5,10 +5,11 @@ require('dotenv').config();
 
 // routes
 const user = require('./routes/user');
+const sensitive = require('./routes/sensitive');
 
 const app = express();
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3007;
 
 app.use(
   cors({
@@ -17,6 +18,7 @@ app.use(
 );
 
 app.use('/user', user);
+app.use('/sensitive', sensitive);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
