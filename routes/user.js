@@ -14,4 +14,15 @@ userRouter.get('/', async (req, res) => {
   }
 });
 
+userRouter.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await db.query(`SELECT * from user_info WHERE id = $1;`, [id]);
+    res.status(200).json(keysToCamel(user));
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err.message);
+  }
+});
+
 module.exports = userRouter;
