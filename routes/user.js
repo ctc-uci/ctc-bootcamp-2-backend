@@ -17,12 +17,13 @@ userRouter.get('/culprit', async (req, res) => {
   try {
     const culpritData = await db.query(`
     SELECT DISTINCT
-      CONCAT(user_info.first_name, ' ', user_info.last_name) AS name, sensitive_data.id
+      CONCAT(user_info.first_name, ' ', user_info.last_name) AS name, ARRAY_AGG(sensitive_data.id) AS quote_texts
     FROM user_info
     INNER JOIN data_access_log ON user_info.id = data_access_log.user_id
     INNER JOIN user_access_level ON user_info.id = user_access_level.id
     INNER JOIN sensitive_data ON data_access_log.sensitive_data_id = sensitive_data.id
-    WHERE user_access_level.access_level < sensitive_data.access_level;
+    WHERE user_access_level.access_level < sensitive_data.access_level
+    GROUP BY user_info.id, user_info.first_name, user_info.last_name;;
     `);
     // const formattedData = culpritData.map((entry) => ({
     //   name: entry.first_name + ' ' + entry.last_name,
