@@ -23,5 +23,3 @@ app.use('/sensitive', sensitive);
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
-
-
