@@ -24,12 +24,12 @@ sensitiveDataRouter.get('/', async (req, res) => {
     res.status(500).send(err.message);
   }
 });
-sensitiveDataRouter.get('/:userId', async (req, res) => {
+sensitiveDataRouter.get('/:id', async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { id } = req.params;
     const sensitiveData = await db.query(
       `
-      SELECT
+      SELECT DISTINCT
         sensitive_data.id,
         sensitive_data.quote_text,
         sensitive_data.access_level,
@@ -39,12 +39,9 @@ sensitiveDataRouter.get('/:userId', async (req, res) => {
         sensitive_data
       LEFT JOIN user_info
         ON sensitive_data.quotee_id = user_info.id
-      WHERE
-        user_access_level.access_level >= sensitive_data.access_level AND
-        user_access_level.id = $(userId)
-      ;
+      WHERE sensitive_data.id = $(id);
     `,
-      { userId },
+      { id },
     );
     res.status(200).json(keysToCamel(sensitiveData));
   } catch (err) {
