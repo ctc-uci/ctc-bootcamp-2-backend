@@ -17,7 +17,7 @@ sensitiveRouter.get('/:id', async (req, res) => {
   const sensitiveId = req.params.id;
 
   try {
-    const sensitives = await db.query(`SELECT * from sensitive_data WHERE id = ${sensitiveId};`);
+    const sensitives = await db.query(`SELECT * from sensitive_data WHERE id = $1;`, [sensitiveId]);
 
     res.status(200).json(sensitives[0]);
   } catch (err) {
