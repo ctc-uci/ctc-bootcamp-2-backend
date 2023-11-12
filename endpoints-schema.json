@@ -4,14 +4,18 @@
   "description": "Return schema of GET /user/culprit/",
   "type": "array",
   "items": {
-    "description": "List of culprit ids",
+    "description": "Culprit object",
     "type": "object",
     "properties": {
-      "culprits": {
-        "description": "List of culprit ids",
+      "name": {
+        "description": "Name of culprit",
+        "type": "string"
+      },
+      "illegalDataAccessed": {
+        "description": "Array of sensitive data ids that were illegally accessed",
         "type": "array",
         "items": {
-          "description": "Unique identifier of the returned user",
+          "description": "Sensitive data id",
           "type": "number"
         }
       }
@@ -138,7 +142,7 @@
 
 /* GET /sensitive/:id/ */
 {
-  "title": "Sensitive Data Accessible by User",
+  "title": "Sensitive Data",
   "description": "Return schema of GET /sensitive/:id",
   "type": "array",
   "items": {
